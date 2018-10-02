@@ -25,7 +25,7 @@ SECRET_KEY = '5rl!7b@cp4_5o-t-1_rn1csmcf$k7e2lvm&td@-z*61tsypiq_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [samweatherreport.herokuapp.com]
 
 
 # Application definition
