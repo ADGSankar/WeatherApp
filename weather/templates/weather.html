@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static '/weather.ico' %}" /> <title>Weather App</title>
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+
+</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+<body>
+<header style="background-color:#209cee;color:#ffffff">
+    <br>
+    <br>
+    <br>
+  <div class="content" align="center">
+                                                <p>
+                                                    <span class="title">Weather Report</span>
+                                                </p>
+  </div>
+    <br>
+    <br>
+
+
+</header>
+<section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                                {{form.cname}}
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Get Weather
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+               <div class="container">
+                   <div class="row">
+                    {% if c == 1 %}
+                       {% if cw1 %}
+                       <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="box">
+                                    <article class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-50x50">
+                                                <img src="http://openweathermap.org/img/w/{{cw1.0.icon}}.png" alt="Image">
+                                            </figure>
+                                        </div>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <span class="title">{{cw1.0.city}}</span>
+                                                    <br>
+                                                    <span class="subtitle">{{cw1.0.temperature}}° C</span>
+                                                    <br> {{cw1.0.description}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                           </div>
+                          {% else %}
+                       <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <span class="title">City not found</span>
+                        </div>
+                       {% endif %}
+                       {% endif %}
+                   </div>
+               </div>
+<br>
+<br>
+     <div class="container">
+         <div class="row">
+             <div class="col-md-3">
+
+                 <!--//for google script-->
+
+             </div>
+                <div class="col-md-6">
+                {% for data in cw %}
+                       <div class="container">
+                           <div class="row">
+
+                               <div class="col-md-6">
+                                    <div class="box">
+                                            <article class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-50x50">
+                                                        <img src="http://openweathermap.org/img/w/{{data.icon}}.png" alt="Image">
+                                                    </figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <div class="content">
+                                                        <p>
+                                                            <span class="title">{{data.city}}</span>
+                                                            <br>
+                                                            <span class="subtitle">{{data.temperature}}° C</span>
+                                                            <br> {{data.description}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                   </div>
+
+                           </div>
+                       </div>
+                {% endfor %}
+                </div>
+             <div class="col-md-3">
+
+                 <!--//for google script-->
+
+             </div>
+         </div>
+     </div>
+
+
+<footer style="background-color:#209cee">
+
+    <div class="content" align="center">
+                                                <p>
+                                                    Designed and Developed by A.D.G.Sankar
+                                                </p>
+  </div>
+</footer>
+</body>
+</html>
